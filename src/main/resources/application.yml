@@ -21,3 +21,7 @@ spring:
         show_sql: true
     defer-datasource-initialization: true
     open-in-view: false
+
+springdoc:
+  swagger-ui:
+    path: /api
