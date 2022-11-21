@@ -1,7 +1,6 @@
 package com.legendaries.test.repository
 
 import com.legendaries.test.model.dto.request.team.TeamFilterCondition
-import com.legendaries.test.model.entity.QCrew.crew
 import com.legendaries.test.model.entity.QTeam.team
 import com.legendaries.test.model.entity.Team
 import com.querydsl.core.types.dsl.BooleanExpression
@@ -24,7 +23,6 @@ class TeamRepositoryImpl(
 
         val query = queryFactory
             .selectFrom(team).distinct()
-            .leftJoin(team.crewList, crew)
             .where(likeTeamName(teamFilterCondition.name))
 
         return PageImpl(
@@ -46,11 +44,11 @@ class TeamRepositoryImpl(
 //    }
 
 
-    fun likeTeamName(teamName: String?): BooleanExpression? {
-        if (teamName.isNullOrEmpty()) {
+    fun likeTeamName(name: String?): BooleanExpression? {
+        if (name.isNullOrEmpty()) {
             return null
         }
 
-        return team.name.contains(teamName)
+        return team.name.contains(name)
     }
 }
