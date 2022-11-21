@@ -24,4 +24,4 @@ spring:
 
 springdoc:
   swagger-ui:
-    path: /api
+    path: /docs-test
