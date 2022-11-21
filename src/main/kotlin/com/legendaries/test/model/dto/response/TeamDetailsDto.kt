@@ -8,7 +8,7 @@ class TeamDetailsDto(
     val name: String,
     val maxCrewCount: Int,
     val nowCrewCount: Int,
-    val crewList: List<CrewDto>? = null,
+    val crewList: List<CrewBaseDto>? = null,
     val createdAt: LocalDateTime,
     val modifiedAt: LocalDateTime?,
 ) {
@@ -21,7 +21,7 @@ class TeamDetailsDto(
                 name = team.name,
                 maxCrewCount = team.maxCrewCount,
                 nowCrewCount = team.crewList.size,
-                crewList = team.crewList.map { crew -> CrewDto.fromEntity(crew) },
+                crewList = team.crewList.map { crew -> CrewBaseDto.fromEntity(crew) },
                 createdAt = team.createdAt!!,
                 modifiedAt = team.modifiedAt
             )
