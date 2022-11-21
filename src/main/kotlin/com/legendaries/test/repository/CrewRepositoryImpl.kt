@@ -1,11 +1,9 @@
 package com.legendaries.test.repository
 
 import com.legendaries.test.model.dto.request.crew.CrewFilterCondition
-import com.legendaries.test.model.dto.request.team.TeamFilterCondition
 import com.legendaries.test.model.entity.Crew
 import com.legendaries.test.model.entity.QCrew.crew
 import com.legendaries.test.model.entity.QTeam.team
-import com.legendaries.test.model.entity.Team
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.data.domain.Page
@@ -13,9 +11,6 @@ import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
-import java.time.LocalDate
-import java.time.Month
-import java.time.Year
 import java.time.YearMonth
 
 @Repository
@@ -30,6 +25,8 @@ class CrewRepositoryImpl(
 
         val query = queryFactory
             .selectFrom(crew).distinct()
+            .leftJoin(crew.team, team)
+            .fetchJoin()
             .where(
                 betweenBirthDate(crewFilterCondition.fromBirth, crewFilterCondition.toBirth),
                 likeTeamNameOrCrewName(crewFilterCondition.name)
@@ -41,17 +38,6 @@ class CrewRepositoryImpl(
             query.fetchCount()
         )
     }
-
-//    override fun findByTeamId(teamId: Long): Team {
-//
-//        return queryFactory
-//            .select(team).distinct()
-//            .from(team)
-//            .leftJoin(team.crewList, crew)
-//            .where(team.id.eq(teamId))
-//            .fetchFirst()
-//
-//    }
 
     fun betweenBirthDate(fromBirth: YearMonth?, toBirth: YearMonth?): BooleanExpression? {
         if (fromBirth != null && toBirth != null) {

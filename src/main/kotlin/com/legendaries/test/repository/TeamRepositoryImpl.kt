@@ -32,18 +32,6 @@ class TeamRepositoryImpl(
         )
     }
 
-//    override fun findByTeamId(teamId: Long): Team {
-//
-//        return queryFactory
-//            .select(team).distinct()
-//            .from(team)
-//            .leftJoin(team.crewList, crew)
-//            .where(team.id.eq(teamId))
-//            .fetchFirst()
-//
-//    }
-
-
     fun likeTeamName(name: String?): BooleanExpression? {
         if (name.isNullOrEmpty()) {
             return null
