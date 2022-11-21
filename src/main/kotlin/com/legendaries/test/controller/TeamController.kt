@@ -1,7 +1,7 @@
 package com.legendaries.test.controller
 
-import com.legendaries.test.model.dto.request.TeamFilterCondition
-import com.legendaries.test.model.dto.request.TeamForm
+import com.legendaries.test.model.dto.request.team.TeamFilterCondition
+import com.legendaries.test.model.dto.request.team.TeamForm
 import com.legendaries.test.model.dto.response.Response
 import com.legendaries.test.model.dto.response.TeamDetailsDto
 import com.legendaries.test.model.dto.response.TeamDto
@@ -31,7 +31,7 @@ class TeamController(
      */
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    fun teamList(teamFilterCondition: TeamFilterCondition, pageable: Pageable): Response<Page<TeamDto>> =
+    fun teamList(@Valid teamFilterCondition: TeamFilterCondition, pageable: Pageable): Response<Page<TeamDto>> =
         Response(HttpStatus.OK, teamService.findTeams(teamFilterCondition, pageable))
 
     /**

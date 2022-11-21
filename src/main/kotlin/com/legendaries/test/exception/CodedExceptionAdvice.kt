@@ -31,8 +31,8 @@ class CodedExceptionAdvice {
 
 
         val errorCode = when (e) {
-            is BindException -> e.bindingResult.allErrors[0].defaultMessage
             is MethodArgumentNotValidException -> e.bindingResult.allErrors[0].defaultMessage
+            is BindException -> e.bindingResult.allErrors[0].defaultMessage
             is ConstraintViolationException -> e.constraintViolations.first().message
             else -> null
         }

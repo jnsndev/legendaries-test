@@ -1,36 +1,41 @@
 package com.legendaries.test.model.entity
 
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.DynamicUpdate
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import javax.persistence.*
 import javax.persistence.FetchType.*
 
 @Entity
 @Table(name = "crew")
+//@DynamicUpdate
 class Crew(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = null,
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "team_id")
-    val team: Team,
+    var team: Team,
 
-    val name: String,
+    var name: String,
 
-    val birthDate: LocalDate,
+    var birthDate: LocalDate,
 
-    val phone: String,
+    var phone: String,
 
-    val joiningDate: LocalDateTime,
+    val joiningDate: LocalDate? = LocalDate.now(ZoneOffset.UTC),
+) : BaseTime() {
 
-    @CreatedDate
-    val createdAt: LocalDateTime,
-
-    @LastModifiedDate
-    val modifiedAt: LocalDateTime
-) {
+    fun update(team: Team, name: String, birthDate: LocalDate, phone: String) {
+        this.name = name
+        this.team = team
+        this.birthDate = birthDate
+        this.phone = phone
+    }
 }

@@ -8,8 +8,12 @@ enum class Code(val message: String) {
     // 팀
     TEAM_NAME_ALREADY_IN_USE("이미 사용되고 있는 팀명입니다."),
     NOT_FOUND_TEAM("해당 팀을 찾을 수 없습니다."),
-    NOT_DELETE_TEAM("해당 팀을 삭제할 수 없습니다.")
+    NOT_DELETE_TEAM("해당 팀을 삭제할 수 없습니다."),
 
 
     // 크루
+    EXCEED_CREW_COUNT("팀 최대 인원을 초과했습니다."),
+    NOT_FOUND_CREW("해당 크루를 찾을 수 없습니다."),
+
+
 }

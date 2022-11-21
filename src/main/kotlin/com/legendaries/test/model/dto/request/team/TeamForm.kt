@@ -1,4 +1,4 @@
-package com.legendaries.test.model.dto.request
+package com.legendaries.test.model.dto.request.team
 
 import com.legendaries.test.model.entity.Team
 import javax.validation.constraints.NotBlank
