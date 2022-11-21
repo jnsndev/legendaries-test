@@ -1,5 +1,8 @@
 # 🚕 Legendaries Coding Test
 
+> 📌 **API 문서 및 테스트**
+> 1. 프로젝트 실행
+> 2. http://localhost:8080/api
 
   
 ### 팀 관리
